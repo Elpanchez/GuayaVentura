@@ -164,8 +164,30 @@ const state = {
 
 const app = document.getElementById("app");
 
+function resetToHome() {
+  state.screen = "home";
+  state.unlockedIndex = 0;
+  state.completed = [];
+  state.currentModuleIndex = null;
+  state.currentQuestionIndex = 0;
+  state.selectedOption = null;
+  state.feedback = null;
+  state.introDismissed = false;
+  render();
+}
+
 function render() {
   app.innerHTML = "";
+
+  const homeButton = document.createElement("button");
+  homeButton.className = "floating-home";
+  homeButton.type = "button";
+  homeButton.innerHTML = "<i class='fa-solid fa-house'></i> Inicio";
+  homeButton.setAttribute("aria-label", "Volver al inicio");
+  homeButton.addEventListener("click", resetToHome);
+
+  app.appendChild(homeButton);
+
   if (state.screen === "home") return renderHome();
   if (state.screen === "map") return renderMap();
   if (state.screen === "module") return renderModule();
@@ -176,24 +198,99 @@ function render() {
 function renderHome() {
   const hero = document.createElement("section");
   hero.className = "hero";
+
   hero.innerHTML = `
-    <div class="hero__emoji">🍬🍈</div>
-    <h1>GuayaVentura</h1>
-    <p class="hero__tagline">El camino del bocadillo veleño</p>
-    <p>
-      Aprende, paso a paso y jugando, cómo se elabora el bocadillo veleño:
-      desde la selección de la guayaba hasta que llega empacado a tus manos.
-      Supera las 6 etapas respondiendo correctamente para avanzar.
-    </p>
+    <div class="hero__content">
+      <div class="hero__copy">
+        <span class="hero__badge">Bocadillo veleño</span>
+        <h1>GuayaVentura</h1>
+        <p class="hero__tagline">El camino del bocadillo veleño</p>
+        <p>
+          Descubre cómo la guayaba pasa por un proceso artesanal y cuidadoso:
+          selección, despulpado, cocción, moldeado, corte y empaque. Cada etapa
+          te acerca a entender el sabor y la tradición de esta delicia.
+        </p>
+
+        <div class="hero__actions">
+          <button class="btn" type="button">Comenzar</button>
+          <button class="btn btn--ghost" type="button">Ver proceso</button>
+        </div>
+
+        <div class="feature-list" aria-label="Características del proyecto">
+          <span class="feature-pill"><i class="fa-solid fa-apple-whole"></i> Guayaba fresca</span>
+          <span class="feature-pill"><i class="fa-solid fa-candy-cane"></i> Proceso artesanal</span>
+          <span class="feature-pill"><i class="fa-solid fa-leaf"></i> Tradición</span>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-label="Ilustración del proceso del bocadillo">
+        <div class="visual-card visual-card--primary">
+          <div class="visual-card__header">
+            <span class="visual-card__tag">Proceso</span>
+            <span aria-hidden="true"><i class="fa-solid fa-route"></i></span>
+          </div>
+          <svg class="guava-art" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Guayaba y bocadillo">
+            <defs>
+              <linearGradient id="guavaGradient" x1="0" x2="1">
+                <stop offset="0%" stop-color="#f7b3c4" />
+                <stop offset="100%" stop-color="#d95d82" />
+              </linearGradient>
+              <linearGradient id="leafGradient" x1="0" x2="1">
+                <stop offset="0%" stop-color="#6fb57d" />
+                <stop offset="100%" stop-color="#3f7d52" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="118" cy="150" rx="92" ry="18" fill="#f1e6dc"/>
+            <path d="M79 110c0-38 30-68 67-68 39 0 71 30 71 68 0 22-8 39-21 53-15 16-38 25-60 25-18 0-37-8-50-24-13-15-20-30-20-54Z" fill="url(#guavaGradient)"/>
+            <path d="M92 83c8 9 16 16 25 20 19 9 35 10 49 4-8 18-27 30-49 30-18 0-34-11-42-27 6-11 10-18 17-27Z" fill="#f7d1dc" opacity="0.7"/>
+            <path d="M112 40c7-12 19-18 33-18 11 0 22 5 30 15-16-2-31 2-43 10-8 5-16 10-20 16 0-7 0-15 0-23Z" fill="url(#leafGradient)"/>
+            <path d="M123 43c-6 22-10 41-16 62" stroke="#3f7d52" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M93 115h58c8 0 14 6 14 14v7c0 8-6 14-14 14H93c-8 0-14-6-14-14v-7c0-8 6-14 14-14Z" fill="#c97b3c"/>
+            <path d="M93 120h58v16H93z" fill="#e6af77" opacity="0.7"/>
+            <path d="M108 95h28v11h-28z" fill="#8a5f33" opacity="0.5"/>
+            <circle cx="118" cy="105" r="4" fill="#fff3ef"/>
+            <circle cx="136" cy="105" r="4" fill="#fff3ef"/>
+          </svg>
+        </div>
+
+        <div class="visual-card visual-card--secondary">
+          <div class="process-steps" aria-label="Etapas del proceso">
+            <div class="process-step">
+              <span class="process-step__icon" aria-hidden="true"><i class="fa-solid fa-seedling"></i></span>
+              <div class="process-step__label">Selección</div>
+            </div>
+            <div class="process-step">
+              <span class="process-step__icon" aria-hidden="true"><i class="fa-solid fa-bowl-food"></i></span>
+              <div class="process-step__label">Despulpado</div>
+            </div>
+            <div class="process-step">
+              <span class="process-step__icon" aria-hidden="true"><i class="fa-solid fa-fire-burner"></i></span>
+              <div class="process-step__label">Cocción</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   `;
-  const btn = document.createElement("button");
-  btn.className = "btn";
-  btn.textContent = "Comenzar";
-  btn.addEventListener("click", () => {
+
+  const startButton = hero.querySelector(".btn");
+  const processButton = hero.querySelector(".btn--ghost");
+
+  startButton.addEventListener("click", () => {
+    state.currentModuleIndex = 0;
+    state.currentQuestionIndex = 0;
+    state.selectedOption = null;
+    state.feedback = null;
+    state.screen = "module";
+    state.introDismissed = false;
+    render();
+  });
+
+  processButton.addEventListener("click", () => {
     state.screen = "map";
     render();
   });
-  hero.appendChild(btn);
+
   app.appendChild(hero);
 }
 
@@ -233,12 +330,12 @@ function renderMap() {
     node.disabled = !isUnlocked;
 
     node.innerHTML = `
-      <span class="node__badge">${isDone ? "✓" : index + 1}</span>
+      <span class="node__badge">${isDone ? "<i class='fa-solid fa-check'></i>" : index + 1}</span>
       <span class="node__text">
         <div class="node__title">Módulo ${mod.id}</div>
         <div class="node__stage">${mod.stage}</div>
       </span>
-      <span class="node__status">${isUnlocked ? (isDone ? "🟢" : "▶️") : "🔒"}</span>
+      <span class="node__status">${isUnlocked ? (isDone ? "<i class='fa-solid fa-circle-check'></i>" : "<i class='fa-solid fa-play'></i>") : "<i class='fa-solid fa-lock'></i>"}</span>
     `;
 
     if (isUnlocked) {
@@ -287,14 +384,14 @@ function renderModule() {
     actions.className = "card__actions";
     const back = document.createElement("button");
     back.className = "btn btn--ghost";
-    back.textContent = "Volver al mapa";
+    back.innerHTML = "<i class='fa-solid fa-arrow-left'></i> Volver al mapa";
     back.addEventListener("click", () => {
       state.screen = "map";
       render();
     });
     const start = document.createElement("button");
     start.className = "btn btn--leaf";
-    start.textContent = "Empezar preguntas";
+    start.innerHTML = "<i class='fa-solid fa-arrow-right'></i> Empezar preguntas";
     start.addEventListener("click", () => {
       state.introDismissed = true;
       render();
@@ -378,7 +475,7 @@ function renderModule() {
       const next = document.createElement("button");
       next.className = "btn btn--leaf";
       const isLastQuestion = state.currentQuestionIndex === mod.questions.length - 1;
-      next.textContent = isLastQuestion ? "Terminar módulo" : "Siguiente pregunta";
+      next.innerHTML = isLastQuestion ? "<i class='fa-solid fa-check'></i> Terminar módulo" : "<i class='fa-solid fa-arrow-right'></i> Siguiente pregunta";
       next.addEventListener("click", () => {
         if (isLastQuestion) {
           completeModule(mod);
@@ -393,7 +490,7 @@ function renderModule() {
     } else {
       const retry = document.createElement("button");
       retry.className = "btn";
-      retry.textContent = "Intentar de nuevo";
+      retry.innerHTML = "<i class='fa-solid fa-rotate-right'></i> Intentar de nuevo";
       retry.addEventListener("click", () => {
         state.selectedOption = null;
         state.feedback = null;
@@ -428,7 +525,7 @@ function renderFinish() {
   const wrap = document.createElement("section");
   wrap.className = "finish";
   wrap.innerHTML = `
-    <div class="finish__emoji">🎉🍬</div>
+    <div class="finish__emoji"><i class="fa-solid fa-trophy"></i></div>
     <h2>¡Completaste el proceso del bocadillo veleño!</h2>
     <p>Repasa aquí las 6 etapas que acabas de aprender:</p>
   `;
@@ -445,18 +542,8 @@ function renderFinish() {
 
   const restart = document.createElement("button");
   restart.className = "btn btn--caramel";
-  restart.textContent = "Jugar de nuevo";
-  restart.addEventListener("click", () => {
-    state.screen = "home";
-    state.unlockedIndex = 0;
-    state.completed = [];
-    state.currentModuleIndex = null;
-    state.currentQuestionIndex = 0;
-    state.selectedOption = null;
-    state.feedback = null;
-    state.introDismissed = false;
-    render();
-  });
+  restart.innerHTML = "<i class='fa-solid fa-rotate-left'></i> Jugar de nuevo";
+  restart.addEventListener("click", resetToHome);
   wrap.appendChild(restart);
 
   app.appendChild(wrap);
