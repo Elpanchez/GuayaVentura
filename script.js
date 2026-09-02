@@ -229,7 +229,7 @@ function renderHome() {
             <span class="visual-card__tag">Proceso</span>
             <span aria-hidden="true"><i class="fa-solid fa-route"></i></span>
           </div>
-          <svg class="guava-art" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Guayaba y bocadillo">
+          <svg class="guava-art" viewBox="0 0 220 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Línea de tiempo: selección de la guayaba, despulpado, cocción en paila y bocadillo terminado">
             <defs>
               <linearGradient id="guavaGradient" x1="0" x2="1">
                 <stop offset="0%" stop-color="#f7b3c4" />
@@ -239,17 +239,77 @@ function renderHome() {
                 <stop offset="0%" stop-color="#6fb57d" />
                 <stop offset="100%" stop-color="#3f7d52" />
               </linearGradient>
+              <linearGradient id="skinGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#c8dc7a" />
+                <stop offset="100%" stop-color="#7fae4a" />
+              </linearGradient>
+              <radialGradient id="pulpRadial" cx="35%" cy="35%" r="75%">
+                <stop offset="0%" stop-color="#ffd9e3" />
+                <stop offset="55%" stop-color="#f2879f" />
+                <stop offset="100%" stop-color="#c14f72" />
+              </radialGradient>
+              <linearGradient id="copperGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e0a468" />
+                <stop offset="100%" stop-color="#b5652c" />
+              </linearGradient>
             </defs>
-            <ellipse cx="118" cy="150" rx="92" ry="18" fill="#f1e6dc"/>
-            <path d="M79 110c0-38 30-68 67-68 39 0 71 30 71 68 0 22-8 39-21 53-15 16-38 25-60 25-18 0-37-8-50-24-13-15-20-30-20-54Z" fill="url(#guavaGradient)"/>
-            <path d="M92 83c8 9 16 16 25 20 19 9 35 10 49 4-8 18-27 30-49 30-18 0-34-11-42-27 6-11 10-18 17-27Z" fill="#f7d1dc" opacity="0.7"/>
-            <path d="M112 40c7-12 19-18 33-18 11 0 22 5 30 15-16-2-31 2-43 10-8 5-16 10-20 16 0-7 0-15 0-23Z" fill="url(#leafGradient)"/>
-            <path d="M123 43c-6 22-10 41-16 62" stroke="#3f7d52" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <path d="M93 115h58c8 0 14 6 14 14v7c0 8-6 14-14 14H93c-8 0-14-6-14-14v-7c0-8 6-14 14-14Z" fill="#c97b3c"/>
-            <path d="M93 120h58v16H93z" fill="#e6af77" opacity="0.7"/>
-            <path d="M108 95h28v11h-28z" fill="#8a5f33" opacity="0.5"/>
-            <circle cx="118" cy="105" r="4" fill="#fff3ef"/>
-            <circle cx="136" cy="105" r="4" fill="#fff3ef"/>
+
+            <!-- línea de tiempo serpenteante -->
+            <path d="M35 70C35 150 185 150 185 230C185 310 35 310 35 380C35 460 185 460 185 530"
+              stroke="#c97b3c" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" fill="none" opacity="0.45"/>
+            <circle cx="35" cy="70" r="13" fill="#b83f60"/>
+            <text x="35" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="sans-serif">1</text>
+            <circle cx="185" cy="230" r="13" fill="#b83f60"/>
+            <text x="185" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="sans-serif">2</text>
+            <circle cx="35" cy="380" r="13" fill="#b83f60"/>
+            <text x="35" y="385" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="sans-serif">3</text>
+            <circle cx="185" cy="530" r="13" fill="#b83f60"/>
+            <text x="185" y="535" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="sans-serif">4</text>
+
+            <!-- 1. Selección: rama con hojas y guayaba entera unida a ella -->
+            <path d="M55 26C80 14 140 14 165 28" stroke="#3f7d52" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="70" cy="20" rx="13" ry="6" fill="url(#leafGradient)" transform="rotate(-20 70 20)"/>
+            <ellipse cx="110" cy="14" rx="13" ry="6" fill="url(#leafGradient)" transform="rotate(3 110 14)"/>
+            <ellipse cx="150" cy="22" rx="13" ry="6" fill="url(#leafGradient)" transform="rotate(20 150 22)"/>
+            <path d="M110 16v30" stroke="#3f7d52" stroke-width="3" fill="none"/>
+            <circle cx="110" cy="78" r="32" fill="url(#skinGradient)"/>
+            <ellipse cx="98" cy="64" rx="10" ry="7" fill="#fff" opacity="0.25" transform="rotate(-20 98 64)"/>
+            <circle cx="110" cy="106" r="2.2" fill="#5c7d34"/>
+
+            <!-- 2. Despulpado: guayaba cortada con volumen (sombreado radial + sombra + brillo) -->
+            <ellipse cx="110" cy="266" rx="46" ry="9" fill="#f1e6dc"/>
+            <path d="M100 196A34 34 0 1 1 100 264Z" fill="url(#skinGradient)" stroke="#5c8a34" stroke-width="1"/>
+            <path d="M100 200A30 30 0 1 1 100 260Z" fill="#f6ecd9"/>
+            <path d="M100 204A26 26 0 1 1 100 256Z" fill="url(#pulpRadial)"/>
+            <path d="M84 210a30 30 0 0 1 10-20" stroke="#fff" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
+            <circle cx="107" cy="214" r="1.8" fill="#e8b84b"/>
+            <circle cx="118" cy="222" r="1.8" fill="#e8b84b"/>
+            <circle cx="113" cy="234" r="1.8" fill="#e8b84b"/>
+            <circle cx="103" cy="242" r="1.8" fill="#e8b84b"/>
+            <circle cx="120" cy="246" r="1.8" fill="#e8b84b"/>
+            <circle cx="109" cy="252" r="1.8" fill="#e8b84b"/>
+
+            <!-- 3. Cocción: paila de cobre al fuego con paleta y vapor -->
+            <path d="M95 425c-6-10-2-18 4-24-1 8 4 10 4 16 0 6-4 10-8 8Z" fill="#ff8a3d"/>
+            <path d="M115 428c-6-9-2-16 4-22-1 7 4 9 4 14 0 6-4 9-8 8Z" fill="#ff6b35"/>
+            <path d="M105 431c-5-8-1-14 4-19-1 6 3 8 3 12 0 5-3 8-7 7Z" fill="#ffb347"/>
+            <path d="M55 372A55 16 0 0 0 165 372L160 396A50 14 0 0 1 60 396Z" fill="#b5652c"/>
+            <ellipse cx="110" cy="372" rx="55" ry="16" fill="url(#copperGradient)" stroke="#8a4f22" stroke-width="2"/>
+            <ellipse cx="110" cy="374" rx="46" ry="12" fill="#c1416a"/>
+            <ellipse cx="98" cy="370" rx="14" ry="5" fill="#e07d96" opacity="0.5"/>
+            <path d="M15 350L95 372" stroke="#a9723c" stroke-width="6" stroke-linecap="round"/>
+            <ellipse cx="95" cy="372" rx="10" ry="5" fill="#c98a52" transform="rotate(-18 95 372)"/>
+            <path d="M90 350c-6-8 6-12 0-20" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <path d="M110 346c-6-8 6-12 0-20" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4"/>
+            <path d="M130 350c-6-8 6-12 0-20" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- 4. Producto final: bocadillo envuelto -->
+            <ellipse cx="110" cy="562" rx="55" ry="8" fill="#f1e6dc"/>
+            <path d="M70 552c20 10 90 10 110 0v8c-20 10-90 10-110 0Z" fill="url(#leafGradient)" opacity="0.9"/>
+            <rect x="75" y="505" width="70" height="26" rx="5" fill="#c97b3c"/>
+            <rect x="75" y="508" width="70" height="6" rx="3" fill="#e6af77" opacity="0.75"/>
+            <rect x="85" y="525" width="70" height="26" rx="5" fill="#b8692f"/>
+            <rect x="85" y="528" width="70" height="6" rx="3" fill="#d99a5c" opacity="0.75"/>
           </svg>
         </div>
 
@@ -266,6 +326,10 @@ function renderHome() {
             <div class="process-step">
               <span class="process-step__icon" aria-hidden="true"><i class="fa-solid fa-fire-burner"></i></span>
               <div class="process-step__label">Cocción</div>
+            </div>
+            <div class="process-step">
+              <span class="process-step__icon" aria-hidden="true"><i class="fa-solid fa-box"></i></span>
+              <div class="process-step__label">Producto final</div>
             </div>
           </div>
         </div>
