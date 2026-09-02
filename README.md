@@ -66,11 +66,6 @@ Este repositorio está publicado con GitHub Pages en:
 
 `https://elpanchez.github.io/GuayaVentura/`
 
-*(Configuración: Settings → Pages → Source: rama `main`, carpeta `/root`.)*
-
-## Créditos
-
-Basado en el modelo de propuesta de gamificación presentado en clase (Fedecacao), adaptado al proceso del bocadillo veleño.
 
 ## Licencia
 
